@@ -1,2 +1,11 @@
 .env
 venv/
+.pytest_cache
+.vscode
+.DS_Store
+__pycache__/
+*.log
+*.log.*
+.idea/*
+*.db
+api_v1/migrations/0*
