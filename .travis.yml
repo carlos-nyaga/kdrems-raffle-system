@@ -12,7 +12,7 @@ services:
   - mysql
 
 before_script:
-  - mysql -e "CREATE DATABASE testdb;" -U root
+  - mysql -e 'CREATE DATABASE testdb;'
 
 env:
   - DB_NAME="testdb" DB_USER="root" DB_PASS="" DB_HOST="127.0.0.1" DB_PORT="3306"
