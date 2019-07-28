@@ -8,4 +8,4 @@ __pycache__/
 *.log.*
 .idea/*
 *.db
-api_v1/migrations/0*
+kdrems/api_v1/migrations/0*

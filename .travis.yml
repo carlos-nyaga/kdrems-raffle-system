@@ -20,7 +20,7 @@ env:
   
 # command to run tests
 script:
-  - pytest
+  - coverage run --source kdrems/ kdrems/manage.py test api_v1
 
   
 after_success:
