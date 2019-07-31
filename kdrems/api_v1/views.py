@@ -1,13 +1,15 @@
 # from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from .models import Attendee
 from .serializers import AttendeeSerializer
-
+import uuid
 
 @api_view(['GET', 'DELETE', 'PUT'])
 def get_delete_update_attendee(request, pk):
+    permission_classes = (IsAuthenticated,)             # <-- And here
     try:
         attendee = Attendee.objects.get(pk=pk)
     except Attendee.DoesNotExist:
@@ -34,6 +36,7 @@ def get_delete_update_attendee(request, pk):
 
 @api_view(['GET', 'POST'])
 def get_post_attendees(request):
+    permission_classes = (IsAuthenticated,)             # <-- And here
     # get all attendees
     if request.method == 'GET':
         attendees = Attendee.objects.all()
@@ -46,8 +49,10 @@ def get_post_attendees(request):
             'middle_name': request.data.get('middle_name'),
             'last_name': request.data.get('last_name'),
             'phone_number': request.data.get('phone_number'),
-            'email': request.data.get('email')
+            'email': request.data.get('email'),
+            'token': uuid.uuid4()
         }
+
         serializer = AttendeeSerializer(data=data)
         if serializer.is_valid():
             serializer.save()

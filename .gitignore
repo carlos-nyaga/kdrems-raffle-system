@@ -9,3 +9,4 @@ __pycache__/
 .idea/*
 *.db
 kdrems/api_v1/migrations/0*
+kdrems/dashboard/migrations/0*

@@ -39,8 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
+    'rest_framework.authtoken',
 
-    'api_v1'
+    'api_v1',
+    'dashboard'
 ]
 
 MIDDLEWARE = [
@@ -80,16 +82,16 @@ WSGI_APPLICATION = 'kdrems.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        # 'NAME': 'kdrems',
-        # 'USER': 'estate',
-        # 'PASSWORD': 'password',
-        # 'HOST': 'localhost',
-        # 'PORT': 3306,
-        'NAME': os.getenv('DB_NAME'),
-        'USER': os.getenv('DB_USER'),
-        'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST': os.getenv('DB_HOST'),
-        'PORT': os.getenv('DB_PORT', default=3306),
+        'NAME': 'kdrems',
+        'USER': 'estate',
+        'PASSWORD': 'password',
+        'HOST': 'localhost',
+        'PORT': 3306,
+        # 'NAME': os.getenv('DB_NAME'),
+        # 'USER': os.getenv('DB_USER'),
+        # 'PASSWORD': os.getenv('DB_PASSWORD'),
+        # 'HOST': os.getenv('DB_HOST'),
+        # 'PORT': os.getenv('DB_PORT', default=3306),
     }
 }
 
@@ -135,6 +137,12 @@ STATIC_URL = '/static/'
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
-    'DEFAULT_PERMISSION_CLASSES': [],
+    'DEFAULT_PERMISSION_CLASSES': (
+        # 'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',  # <-- And here
+    ],
     'TEST_REQUEST_DEFAULT_FORMAT': 'json'
 }

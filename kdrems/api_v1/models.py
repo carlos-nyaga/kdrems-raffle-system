@@ -6,7 +6,7 @@ from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 from django.contrib.contenttypes.models import ContentType
 from django.utils import timezone
-
+import uuid
 UserModel = get_user_model()
 
 
@@ -20,7 +20,7 @@ class Attendee(models.Model):
     last_name = models.CharField("last name", max_length=32)
     phone_number = models.CharField("phone number", max_length=128)
     email = models.CharField("email", max_length=32)
-    ticket = models.CharField("ticket", max_length=64, blank=True, null=True, default=None)
+    ticket = models.UUIDField("ticket", primary_key=True, default=uuid.uuid4, editable=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
