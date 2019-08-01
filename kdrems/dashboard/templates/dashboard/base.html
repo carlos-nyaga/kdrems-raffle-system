@@ -268,7 +268,10 @@
 
   <!-- Demo scripts for this page-->
   <script src="{% static 'js/demo/datatables-demo.js' %}"></script>
-
+  <script>
+      var Tk = "{{authToken}}"
+      var attendees_url = "{% url 'dashboard:attendees' %}"
+  </script>
   <!-- Functionality script for this template-->
   <script src="{% static 'js/plugin.js' %}"></script>
 

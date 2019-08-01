@@ -19,22 +19,46 @@ $(document).ready(function(){
 
     var SaveForm =  function(){
 		var form = $(this);
-		console.log(form.serialize())
-		// $.ajax({
-		// 	url: form.attr('data-url'),
-		// 	data: form.serialize(),
-		// 	type: form.attr('method'),
-		// 	dataType: 'json',
-		// 	success: function(data){
-		// 		if(data.form_is_valid){
-		// 			$('#book-table tbody').html(data.book_list);
-		// 			$('#modal-book').modal('hide');
-		// 		} else {
-		// 			$('#modal-book .modal-content').html(data.html_form)
-		// 		}
-		// 	}
-		// })
-		// return false;
+		var fname = $('#fname').val()
+		var mname = $('#mname').val()
+		var lname = $('#lname').val()
+		var phone = $('#phone').val()
+		var email = $('#email').val()
+		var token = "Token "+ Tk;
+		data = {
+			"first_name" : fname,
+			"middle_name" : mname,
+			"last_name" : lname,
+			"phone_number" : phone,
+			"email" : email,
+
+		};
+		console.log(data);
+		console.log(token);
+		$.ajax({
+			url: form.attr('data-url'),
+			data: data,
+			type: form.attr('method'),
+			dataType: 'json',
+			beforeSend: function(request) {
+				request.setRequestHeader("Authorization", token);
+			  },
+			success: function(data){
+				console.log(data);
+				$.ajax({
+					url: attendees_url,
+					type: 'GET',
+					success: function(data){
+						console.log(data);
+						location.reload();
+						// form.submit();
+						// $("#dataTable tbody").html(data);
+					}
+				});
+				$('#modal-attendee').modal('hide');
+			}
+		})
+		return false;
     }
     
 // create 
@@ -46,50 +70,8 @@ $('#book-table').on("click",".show-form-update",ShowForm);
 $('#modal-book').on("submit",".update-form",SaveForm)
 
 //delete
-$('#book-table').on("click",".show-form-delete",ShowForm);
+$('#modal-attendee').on("click",".show-form-delete",ShowForm);
 $('#modal-book').on("submit",".delete-form",SaveForm)
 
 });
 
-
-
-// $("#loginform button[type='submit']").click(function (ev) {
-//     ev.preventDefault();
-//     var uname = $('#uname').val();
-//     var upass = $('#upass').val();
-
-//     data = {
-//         "username": uname,
-//         "password": upass,
-//     };
-//     console.log(uname);
-//     console.log(upass);
-//     console.log(data);
-//     console.log("Submittttt.....");
-//     LoginSubmit(data)
-
-
-// });
-
-
-// /*
-//     Login Form Submit
-// */
-// function LoginSubmit(data) {
-//     var token = '{{csrf_token}}';
-//     $.ajax({
-//         type: 'POST',
-//         url: "",
-//         headers: { "X-CSRFToken": token },
-//         data: data,
-//         success: function (response) {
-//             console.log(response.status);
-
-//         },
-//         error: function (err) {
-//             console.log("lalalallalla");
-//             console.log(err);
-
-//         }
-//     });    
-// }

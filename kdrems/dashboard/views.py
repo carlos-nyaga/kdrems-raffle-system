@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from api_v1.models import Attendee
+from rest_framework.authtoken.models import Token
 
 
 def home(request):
@@ -19,5 +20,6 @@ def dashboard(request):
 def attendee_list(request):
 	attendees = Attendee.objects.all()
 	context = {
-		'attendees': attendees}
+		'attendees': attendees,
+		'authToken': Token.objects.get_or_create(user=request.user)[0]}
 	return render(request, "dashboard/attendee_list.html", context)
