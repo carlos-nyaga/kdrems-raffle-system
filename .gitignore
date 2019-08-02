@@ -10,3 +10,5 @@ __pycache__/
 *.db
 kdrems/api_v1/migrations/0*
 kdrems/dashboard/migrations/0*
+*.pyc
+*.cpython-36

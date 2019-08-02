@@ -1,0 +1,26 @@
+{% for attendee in attendees %}
+  <tr>
+      <td>
+          <div class="custom-control custom-checkbox">
+                 <input type="checkbox" name="check" class="custom-control-input" id="check-{{ forloop.counter }}" data-id="{{ item.pk }}">
+                 <label class="custom-control-label" for="check-{{ forloop.counter }}"></label>
+         </div>
+    </td>
+    <td>{{ attendee.first_name }}</td>
+    <td>{{ attendee.middle_name }}</td>
+    <td>{{ attendee.last_name }}</td>
+    <td>{{ attendee.phone_number }}</td>
+    <td>{{ attendee.email }}</td>
+    <td>{{ attendee.ticket }}</td>
+    <td>
+        <a href='#' title='Edit Attendee' data-toggle='tooltip'><i class='fa fa-pen-square show-form-update' data-url="{% url 'dashboard:attendee-update' attendee.pk %}"></i></a>
+        <a href='#' title='Delete Attendee' data-toggle='tooltip'><i class='fa fa-trash show-form-delete' data-url="{% url 'dashboard:attendee-delete' attendee.pk %}"></i></a>
+
+    </td>
+
+  </tr>
+{% empty %}
+  <tr>
+    <td colspan="7" class="text-center bg-warning">No Attendees</td>
+  </tr>
+{% endfor %}
