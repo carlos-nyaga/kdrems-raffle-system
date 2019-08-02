@@ -18,7 +18,7 @@ urlpatterns = [
 
     path('attendees/', views.attendee_list, name='attendees'),
     path('attendees/create/', views.attendee_create, name='attendee-create'),
-    path('attendees/update/<uuid:pk>/', views.attendee_update, name='attendee-update'),
+    path('attendees/edit/<uuid:pk>/', views.attendee_update, name='attendee-update'),
     path('attendees/delete/<uuid:pk>/', views.attendee_delete, name='attendee-delete'),
 
     path('attendees/export/', views.attendees_export, name='attendees-export'),

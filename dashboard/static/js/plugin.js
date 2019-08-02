@@ -16,8 +16,9 @@ $(document).ready(function(){
 
 	var SaveForm =  function(){
 		var form = $(this);
+		url = form.attr("data-url")
 		$.ajax({
-			url: form.attr('data-url'),
+			url: url,
 			data: form.serialize(),
 			type: form.attr('method'),
 			dataType: 'json',

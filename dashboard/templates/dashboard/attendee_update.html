@@ -1,6 +1,6 @@
 {% load crispy_forms_tags %}
 <!-- Update Modal -->
-        <form method="post" data-url="{% url 'dashboard:attendee-update' attendee.pk %}" class="create-form needs-validation" >
+        <form method="POST" data-url="{% url 'dashboard:attendee-update' attendee.pk %}" class="create-form needs-validation" >
                 {% csrf_token %}
                     <div class="modal-header">
                     <h5 class="modal-title" >Update Attendee</h5>
