@@ -16,9 +16,8 @@ $(document).ready(function(){
 
 	var SaveForm =  function(){
 		var form = $(this);
-		url = form.attr("data-url")
 		$.ajax({
-			url: url,
+			url: form.attr('data-url'),
 			data: form.serialize(),
 			type: form.attr('method'),
 			dataType: 'json',
@@ -33,6 +32,22 @@ $(document).ready(function(){
 		})
 		return false;
 	}
+	var Winner = function(){
+		console.log("Huuuraaayyy")
+		var btn = $(this);
+		$.ajax({
+			url: btn.attr("data-url"),
+			type: 'get',
+			dataType:'json',
+			beforeSend: function(){
+				$('#modal-winner').modal('show');
+			},
+			success: function(data){
+				$('#modal-winner .modal-content').html(data.html_form);
+				$('.ticket').hide();
+			}
+		});
+	};
 
 // create 
 $(".show-form").click(ShowForm);
@@ -45,8 +60,8 @@ $('#modal-attendee').on("submit",".update-form",SaveForm)
 //delete
 $('#dataTable').on("click",".show-form-delete",ShowForm);
 $('#modal-attendee').on("submit",".delete-form",SaveForm)
+$(".reveal-ticket").click(Winner);
 });
-
 
 
 // $(document).ready(function(){
