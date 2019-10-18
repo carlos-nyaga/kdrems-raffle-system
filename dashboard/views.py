@@ -10,6 +10,9 @@ from .res import AttendeeResource
 def home(request):
     return render(request, "dashboard/landing.html", context={})
 
+def gallery(request):
+    return render(request, "dashboard/gallery.html", context={})
+
 def index(request):
     return redirect(reverse("dashboard:dashboard"))
 

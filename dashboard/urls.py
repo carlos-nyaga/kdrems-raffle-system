@@ -10,6 +10,8 @@ app_name = DashboardConfig.name
 urlpatterns = [
 
     path('', views.home, name='home'),
+    path('gallery/', views.gallery, name='gallery'),
+
     path('index/', views.index, name='index'),
 
     path('dashboard/', views.dashboard, name='dashboard'),
